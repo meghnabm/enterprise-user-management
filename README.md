@@ -58,8 +58,8 @@ sudo -l -U alice    # should have full sudo
 sudo -l -U bob      # only restart services
 sudo -l -U charlie  # no sudo
 ```
-I tested my sudoers configuration by verifying group membership, running commands as each user, and checking with sudo -l. 
-Devs had full sudo, ops could only restart services, and finance had no sudo privileges. 
+I tested my sudoers configuration by verifying group membership, running commands as each user, and checking with sudo -l. <br>
+Devs had full sudo, ops could only restart services, and finance had no sudo privileges. <br>
 This confirmed role-based access control was working correctly.
 
 ### Step 7: Configure PAM for Failed Login Tracking
@@ -71,14 +71,14 @@ auth [default=die] pam_faillock.so authfail deny=3 unlock_time=600
 auth sufficient pam_unix.so try_first_pass
 auth required pam_deny.so
 ```
-- deny=3 → lock account after 3 failed attempts
-- unlock_time=600 → auto-unlock after 10 minutes
+deny=3 → lock account after 3 failed attempts<br>
+unlock_time=600 → auto-unlock after 10 minutes
 
-*	Check failed attempts: faillock --user alice <br>
-*	Reset counters: faillock --user alice --reset
+*	Check failed attempts: `faillock --user alice`<br>
+*	Reset counters: `faillock --user alice --reset`
 
 ### Step 8: Configure Auditd Rules
-Add /etc/audit/rules.d/auth.rules:
+Add `/etc/audit/rules.d/auth.rules`:
 ```
 -w /var/log/auth.log -p wa -k auth_fail
 -w /var/log/sudo.log -p wa -k sudo_usage
@@ -103,16 +103,16 @@ sudo ausearch -k passwd_changes
 ```
 
 Instead of reading raw logs, use these commands:
-- Failed logins
-`sudo ausearch -k auth_fail --success no`
+- Failed logins:
+`sudo ausearch -k auth_fail --success no`<br>
 → Shows only failed login attempts.
 
-- Sudo usage
-`sudo ausearch -k sudo_usage | aureport -au`
+- Sudo usage:
+`sudo ausearch -k sudo_usage | aureport -au`<br>
 → Summarizes which users ran sudo.
 
-- Password file changes
-`sudo ausearch -k passwd_changes | aureport -f`
+- Password file changes:
+`sudo ausearch -k passwd_changes | aureport -f`<br>
 → Summarizes file access/change events.
 
 ### Step 9: Automate Daily Audit Reports with Cron
