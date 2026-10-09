@@ -1,0 +1,16 @@
+username,primary_group,secondary_groups
+alice,dev,qa
+bob,ops,security
+charlie,finance,audit
+david,hr,training
+emma,marketing,sales
+frank,ops,dev
+grace,qa,security
+henry,finance,ops
+isabel,dev,marketing
+jack,security,audit
+karen,training,hr
+liam,sales,marketing
+mia,qa,dev
+noah,ops,finance
+olivia,hr,security
