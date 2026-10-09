@@ -90,7 +90,7 @@ sudo augenrules --load
 sudo auditctl -l
 ```
 Steps before testing:
-Run below steps so that we get required output for test.
+Perform the following actions to generate events for testing.
 - Attempt wrong SSH login: `ssh alice@localhost`
 - Run: `sudo ls /root`
 - `sudo touch /etc/passwd`
@@ -116,10 +116,19 @@ Instead of reading raw logs, use these commands:
 → Summarizes file access/change events.
 
 ## 📊 Sample Output
+## 📊 Sample Output
+
 Failed login summary
 ---------------------
 user=alice tty=ssh rhost=127.0.0.1
-...
+
+Sudo usage summary
+---------------------
+User bob executed: systemctl restart nginx
+
+Passwd change summary
+---------------------
+File: /etc/passwd modified by root
 
 
 ### Step 9: Automate Daily Audit Reports with Cron
