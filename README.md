@@ -58,7 +58,7 @@ sudo -l -U alice    # should have full sudo
 sudo -l -U bob      # only restart services
 sudo -l -U charlie  # no sudo
 ```
-I tested my sudoers configuration by verifying group membership, running commands as each user, and checking with sudo -l. <br>
+Role‑based access was verified by checking group membership, running commands as each user, and confirming with `sudo -l`. <br>
 Devs had full sudo, ops could only restart services, and finance had no sudo privileges. <br>
 This confirmed role-based access control was working correctly.
 
@@ -115,9 +115,16 @@ Instead of reading raw logs, use these commands:
 `sudo ausearch -k passwd_changes | aureport -f`<br>
 → Summarizes file access/change events.
 
+## 📊 Sample Output
+Failed login summary
+---------------------
+user=alice tty=ssh rhost=127.0.0.1
+...
+
+
 ### Step 9: Automate Daily Audit Reports with Cron
 - Added `scripts/daily_audit_report.sh` to generate summaries of failed logins, sudo usage, and passwd changes.
 - Configured cron to run daily at 11 PM: `0 23 * * * /path/to/scripts/daily_audit_report.sh`
-- Reports are stored in `/var/log/daily_audit_report_<date>.log`.
+- Reports are generated daily and stored in `/var/log/daily_audit_report_<date>.log`.
 
 
