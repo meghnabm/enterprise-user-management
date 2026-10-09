@@ -116,8 +116,7 @@ Instead of reading raw logs, use these commands:
 → Summarizes file access/change events.
 
 ## 📊 Sample Output
-## 📊 Sample Output
-
+```
 Failed login summary
 ---------------------
 user=alice tty=ssh rhost=127.0.0.1
@@ -129,7 +128,7 @@ User bob executed: systemctl restart nginx
 Passwd change summary
 ---------------------
 File: /etc/passwd modified by root
-
+```
 
 ### Step 9: Automate Daily Audit Reports with Cron
 - Added `scripts/daily_audit_report.sh` to generate summaries of failed logins, sudo usage, and passwd changes.
